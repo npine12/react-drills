@@ -1,26 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ToDo from './ToDo'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      tasks: [],
+      text: ''
+    }
+  }
+  render() {
+    return <div>
+      <input value={this.state.text} onChange={event => this.setState({ text: event.target.value })} type='text' />
+      <button onClick={event => {
+        this.setState({ tasks: [...this.state.tasks, this.state.text], text: '' })
+      }}>Add</button>
+      <ToDo tasks={this.state.tasks} />
     </div>
-  );
+  }
 }
 
 export default App;
